@@ -3,12 +3,11 @@
 int DBSCAN::run()
 {
     int clusterID = 1;
-    vector<Point>::iterator iter;
-    for(iter = m_points.begin(); iter != m_points.end(); ++iter)
+    for ( const Point  &element : m_points )
     {
-        if ( iter->clusterID == UNCLASSIFIED )
+        if ( element.clusterID == UNCLASSIFIED )
         {
-            if ( expandCluster(*iter, clusterID) != FAILURE )
+            if ( expandCluster(element, clusterID) != FAILURE )
             {
                 clusterID += 1;
             }
@@ -29,12 +28,12 @@ int DBSCAN::expandCluster(Point point, int clusterID)
     }
     else
     {
-        int index = 0, indexCorePoint = 0;
-        vector<int>::iterator iterSeeds;
-        for( iterSeeds = clusterSeeds.begin(); iterSeeds != clusterSeeds.end(); ++iterSeeds)
+        int index = 0;
+        int indexCorePoint = 0;
+        for( const int  &seed : clusterSeeds)
         {
-            m_points.at(*iterSeeds).clusterID = clusterID;
-            if (m_points.at(*iterSeeds).x == point.x)
+            m_points.at(seed).clusterID = clusterID;
+            if (m_points.at(seed).x == point.x)
             {
                 indexCorePoint = index;
             }
@@ -48,17 +47,16 @@ int DBSCAN::expandCluster(Point point, int clusterID)
 
             if ( clusterNeighors.size() >= m_minPoints )
             {
-                vector<int>::iterator iterNeighors;
-                for ( iterNeighors = clusterNeighors.begin(); iterNeighors != clusterNeighors.end(); ++iterNeighors )
+                for (  const int  &neighor : clusterNeighors )
                 {
-                    if ( m_points.at(*iterNeighors).clusterID == UNCLASSIFIED || m_points.at(*iterNeighors).clusterID == NOISE )
+                    if ( m_points.at(neighor).clusterID == UNCLASSIFIED || m_points.at(neighor).clusterID == NOISE )
                     {
-                        if ( m_points.at(*iterNeighors).clusterID == UNCLASSIFIED )
+                        if ( m_points.at(neighor).clusterID == UNCLASSIFIED )
                         {
-                            clusterSeeds.push_back(*iterNeighors);
+                            clusterSeeds.push_back(neighor);
                             n = clusterSeeds.size();
                         }
-                        m_points.at(*iterNeighors).clusterID = clusterID;
+                        m_points.at(neighor).clusterID = clusterID;
                     }
                 }
             }
@@ -71,11 +69,10 @@ int DBSCAN::expandCluster(Point point, int clusterID)
 vector<int> DBSCAN::calculateCluster(Point point)
 {
     int index = 0;
-    vector<Point>::iterator iter;
     vector<int> clusterIndex;
-    for( iter = m_points.begin(); iter != m_points.end(); ++iter)
+    for ( const Point  &element : m_points )
     {
-        if ( calculateDistance(point, *iter) <= m_epsilon )
+        if ( calculateDistance(point, element) <= m_epsilon )
         {
             clusterIndex.push_back(index);
         }
