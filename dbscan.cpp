@@ -106,7 +106,12 @@ Point DBSCAN::getCenter(vector<Point> vp)
 	{
 		pc.clusterID = vp[0].clusterID;
 	}
-
+	pc.x = 0;
+    for ( const Point  &p : vp )
+    {
+    	pc.x += p.x;
+    }
+    pc.x /= vp.size();
 	return pc;
 }
 
