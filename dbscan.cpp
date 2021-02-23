@@ -88,6 +88,11 @@ vector<vector<Point>> DBSCAN::getClusters()
     vector<vector<Point>> clusterIndex;
     for ( const Point  &element : m_points )
     {
+    	while (clusterIndex.size() <= element.clusterID)
+    	{
+    		vector<Point> v;
+    		clusterIndex.push_back(v);
+    	}
     	clusterIndex[element.clusterID].push_back(element);
     }
     return clusterIndex;
