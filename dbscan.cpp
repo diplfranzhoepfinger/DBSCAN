@@ -2,7 +2,7 @@
 
 int DBSCAN::run()
 {
-    int clusterID = 1;
+    int clusterID = 0;
     for ( const Point  &element : m_points )
     {
         if ( element.clusterID == UNCLASSIFIED )
