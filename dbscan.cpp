@@ -34,7 +34,7 @@ int DBSCAN::expandCluster(Point point, int clusterID)
         for( iterSeeds = clusterSeeds.begin(); iterSeeds != clusterSeeds.end(); ++iterSeeds)
         {
             m_points.at(*iterSeeds).clusterID = clusterID;
-            if (m_points.at(*iterSeeds).x == point.x && m_points.at(*iterSeeds).y == point.y && m_points.at(*iterSeeds).z == point.z )
+            if (m_points.at(*iterSeeds).x == point.x)
             {
                 indexCorePoint = index;
             }
@@ -86,7 +86,7 @@ vector<int> DBSCAN::calculateCluster(Point point)
 
 inline double DBSCAN::calculateDistance( Point pointCore, Point pointTarget )
 {
-    return pow(pointCore.x - pointTarget.x,2)+pow(pointCore.y - pointTarget.y,2)+pow(pointCore.z - pointTarget.z,2);
+    return pointCore.x - pointTarget.x;
 }
 
 
