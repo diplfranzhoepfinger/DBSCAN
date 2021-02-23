@@ -88,12 +88,16 @@ vector<vector<Point>> DBSCAN::getClusters()
     vector<vector<Point>> clusterIndex;
     for ( const Point  &element : m_points )
     {
-    	while (clusterIndex.size() <= element.clusterID)
+    	if (element.clusterID >= 0) //avoid -1 and -2 Clusters to be used.
     	{
-    		vector<Point> v;
-    		clusterIndex.push_back(v);
-    	}
+			const size_t clusterId = element.clusterID;
+			while (clusterIndex.size() <= clusterId)
+			{
+				vector<Point> v;
+				clusterIndex.push_back(v);
+			}
     	clusterIndex[element.clusterID].push_back(element);
+    	}
     }
     return clusterIndex;
 }
@@ -102,16 +106,17 @@ vector<vector<Point>> DBSCAN::getClusters()
 Point DBSCAN::getCenter(vector<Point> vp)
 {
 	Point pc;
+	pc.x = 0;
+	pc.clusterID = UNCLASSIFIED;
 	if(vp.size() > 0)
 	{
 		pc.clusterID = vp[0].clusterID;
+		for ( const Point  &p : vp )
+		{
+	    	pc.x += p.x;
+	    }
+	    pc.x /= vp.size(); //avoid division by 0.
 	}
-	pc.x = 0;
-    for ( const Point  &p : vp )
-    {
-    	pc.x += p.x;
-    }
-    pc.x /= vp.size();
 	return pc;
 }
 
