@@ -5,8 +5,6 @@
 #include <cmath>
 
 #define UNCLASSIFIED -1
-#define CORE_POINT 1
-#define BORDER_POINT 2
 #define NOISE -2
 #define SUCCESS 0
 #define FAILURE -3
