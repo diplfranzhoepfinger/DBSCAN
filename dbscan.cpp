@@ -98,6 +98,18 @@ vector<vector<Point>> DBSCAN::getClusters()
     return clusterIndex;
 }
 
+
+Point DBSCAN::getCenter(vector<Point> vp)
+{
+	Point pc;
+	if(vp.size() > 0)
+	{
+		pc.clusterID = vp[0].clusterID;
+	}
+
+	return pc;
+}
+
 inline double DBSCAN::calculateDistance( Point pointCore, Point pointTarget )
 {
     return abs(pointCore.x - pointTarget.x);
