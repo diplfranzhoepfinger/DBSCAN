@@ -43,20 +43,20 @@ int DBSCAN::expandCluster(Point point, int clusterID)
 
         for( vector<int>::size_type i = 0, n = clusterSeeds.size(); i < n; ++i )
         {
-            vector<int> clusterNeighors = calculateCluster(m_points.at(clusterSeeds[i]));
+            vector<int> clusterNeighbors = calculateCluster(m_points.at(clusterSeeds[i]));
 
-            if ( clusterNeighors.size() >= m_minPoints )
+            if ( clusterNeighbors.size() >= m_minPoints )
             {
-                for (  const int  &neighor : clusterNeighors )
+                for (  const int  &neighbor : clusterNeighbors )
                 {
-                    if ( m_points.at(neighor).clusterID == UNCLASSIFIED || m_points.at(neighor).clusterID == NOISE )
+                    if ( m_points.at(neighbor).clusterID == UNCLASSIFIED || m_points.at(neighbor).clusterID == NOISE )
                     {
-                        if ( m_points.at(neighor).clusterID == UNCLASSIFIED )
+                        if ( m_points.at(neighbor).clusterID == UNCLASSIFIED )
                         {
-                            clusterSeeds.push_back(neighor);
+                            clusterSeeds.push_back(neighbor);
                             n = clusterSeeds.size();
                         }
-                        m_points.at(neighor).clusterID = clusterID;
+                        m_points.at(neighbor).clusterID = clusterID;
                     }
                 }
             }
