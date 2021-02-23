@@ -31,6 +31,7 @@ public:
 
     int run();
     vector<int> calculateCluster(Point point);
+    vector<vector<Point>> getClusters();
     int expandCluster(Point point, int clusterID);
     inline double calculateDistance(Point pointCore, Point pointTarget);
 

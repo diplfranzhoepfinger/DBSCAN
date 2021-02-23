@@ -84,6 +84,18 @@ vector<int> DBSCAN::calculateCluster(Point point)
     return clusterIndex;
 }
 
+
+vector<vector<Point>> DBSCAN::getClusters()
+{
+
+    vector<vector<Point>> clusterIndex;
+    for ( const Point  &element : m_points )
+    {
+    	clusterIndex[element.clusterID].push_back(element);
+    }
+    return clusterIndex;
+}
+
 inline double DBSCAN::calculateDistance( Point pointCore, Point pointTarget )
 {
     return abs(pointCore.x - pointTarget.x);
