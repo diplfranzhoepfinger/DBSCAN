@@ -37,8 +37,8 @@ public:
     int getTotalPointSize() {return m_pointSize;}
     int getMinimumClusterSize() {return m_minPoints;}
     int getEpsilonSize() {return m_epsilon;}
-private:
     vector<Point> m_points;
+private:
     unsigned int m_pointSize;
     unsigned int m_minPoints;
     float m_epsilon;
