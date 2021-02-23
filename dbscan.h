@@ -15,7 +15,7 @@ typedef struct Point_
 {
     float x;  // X position
     int clusterID;  // clustered ID
-}Point;
+} Point;
 
 class DBSCAN {
 public:    
