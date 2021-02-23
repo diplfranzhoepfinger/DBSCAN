@@ -86,7 +86,7 @@ vector<int> DBSCAN::calculateCluster(Point point)
 
 inline double DBSCAN::calculateDistance( Point pointCore, Point pointTarget )
 {
-    return pointCore.x - pointTarget.x;
+    return abs(pointCore.x - pointTarget.x);
 }
 
 
